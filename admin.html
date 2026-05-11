@@ -397,6 +397,9 @@ tr:hover td{background:#fafafa}
   th,td{padding:10px 12px}
   .filters{flex-direction:column;align-items:stretch}
   .filter-input.search{min-width:unset}
+  .topbar-btn span,.topbar-btn-text{display:none}
+  .topbar-actions{gap:6px}
+  .topbar-btn{padding:9px 11px}
 }
 
 .sidebar-overlay{
@@ -474,6 +477,10 @@ tr:hover td{background:#fafafa}
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93l-1.41 1.41M5.34 18.66l-1.41 1.41M21 12h-2M5 12H3M19.07 19.07l-1.41-1.41M5.34 5.34L3.93 3.93M12 21v-2M12 5V3"/></svg>
           Paramètres
         </button>
+        <button class="nav-item" data-page="database" onclick="navigate('database')">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+          Base de données
+        </button>
         <a href="index.html" class="nav-item">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
           Voir le site
@@ -508,11 +515,11 @@ tr:hover td{background:#fafafa}
       <div class="topbar-actions">
         <button class="topbar-btn secondary" onclick="refreshData()">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg>
-          Actualiser
+          <span class="topbar-btn-text">Actualiser</span>
         </button>
         <button class="topbar-btn primary" onclick="exportCSV()">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          Exporter
+          <span class="topbar-btn-text">Exporter</span>
         </button>
       </div>
     </div>
@@ -626,6 +633,7 @@ tr:hover td{background:#fafafa}
             <div class="settings-field"><label class="settings-label">NOM D'AFFICHAGE</label><input class="settings-input" id="s-name" placeholder="Nom administrateur"/></div>
             <div class="settings-field"><label class="settings-label">EMAIL</label><input class="settings-input" id="s-email" type="email" placeholder="admin@example.com"/></div>
             <div class="settings-field"><label class="settings-label">NOUVEAU MOT DE PASSE</label><input class="settings-input" id="s-pwd" type="password" placeholder="Laisser vide pour ne pas changer"/></div>
+            <div class="settings-field"><label class="settings-label">CONFIRMER LE MOT DE PASSE</label><input class="settings-input" id="s-pwd2" type="password" placeholder="Répéter le nouveau mot de passe"/></div>
             <button class="settings-save" onclick="saveAccountSettings()">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
               Enregistrer
@@ -659,6 +667,39 @@ tr:hover td{background:#fafafa}
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
               Sauvegarder la config
             </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- DATABASE PAGE -->
+      <div class="page" id="page-database">
+        <div class="info-banner">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+          <div>Visualisez et gérez directement le contenu de la base de données (Firestore ou localStorage). Cliquez sur une collection pour voir les enregistrements. <strong>Soyez prudent lors de la suppression.</strong></div>
+        </div>
+        <div class="db-toolbar" style="display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap;align-items:center">
+          <button class="topbar-btn secondary" onclick="loadDB('inscriptions')" id="dbtab-inscriptions" style="font-size:13px;padding:9px 16px">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="15" height="15"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            Inscriptions
+          </button>
+          <button class="topbar-btn secondary" onclick="loadDB('messages')" id="dbtab-messages" style="font-size:13px;padding:9px 16px">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="15" height="15"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            Messages
+          </button>
+          <button class="topbar-btn primary" onclick="exportDBJSON()" style="font-size:13px;padding:9px 16px;margin-left:auto">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="15" height="15"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Export JSON
+          </button>
+          <button class="topbar-btn secondary" onclick="clearDB()" style="font-size:13px;padding:9px 16px;border-color:#feb2b2;color:#e53e3e">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="15" height="15"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4a1 1 0 011-1h4a1 1 0 011 1v2"/></svg>
+            Vider la collection
+          </button>
+        </div>
+        <div class="db-stats" id="dbStats" style="display:flex;gap:12px;margin-bottom:16px;font-size:13px;color:var(--muted);flex-wrap:wrap"></div>
+        <div class="table-wrap" id="dbTableWrap">
+          <div style="padding:48px;text-align:center;color:var(--muted)">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:40px;height:40px;margin:0 auto 12px;display:block;opacity:.3"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+            Sélectionnez une collection ci-dessus pour afficher les données.
           </div>
         </div>
       </div>
@@ -749,9 +790,34 @@ window.doLogin = async () => {
   // Demo mode fallback
   if(!window._fbReady || !auth) {
     const demoEmail = localStorage.getItem('adminEmail') || 'admin@progresselit.tn';
-    const demoPwd = localStorage.getItem('adminPwd') || 'admin123';
-    if(email === demoEmail && pwd === demoPwd) {
-      window._currentUser = { email, displayName: 'Admin' };
+    const storedHash = localStorage.getItem('adminPwdHash');
+    const legacyPwd = localStorage.getItem('adminPwd');
+
+    let match = false;
+    if(email === demoEmail) {
+      if(storedHash) {
+        // Compare hashed password
+        const hashBuffer = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(pwd));
+        const hashHex = Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2,'0')).join('');
+        match = (hashHex === storedHash);
+      } else if(legacyPwd) {
+        // Legacy plain text (first-time use)
+        match = (pwd === legacyPwd);
+        if(match) {
+          // Auto-upgrade to hashed
+          const hashBuffer = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(pwd));
+          const hashHex = Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2,'0')).join('');
+          localStorage.setItem('adminPwdHash', hashHex);
+          localStorage.removeItem('adminPwd');
+        }
+      } else {
+        // Default credentials (first-time, no saved password)
+        match = (pwd === 'admin123');
+      }
+    }
+
+    if(match) {
+      window._currentUser = { email, displayName: localStorage.getItem('academySettings') ? JSON.parse(localStorage.getItem('academySettings')).name || 'Admin' : 'Admin' };
       showApp(window._currentUser);
     } else {
       showLoginError('Email ou mot de passe incorrect.');
@@ -769,6 +835,7 @@ window.doLogin = async () => {
       'auth/wrong-password': 'Mot de passe incorrect.',
       'auth/invalid-email': 'Email invalide.',
       'auth/too-many-requests': 'Trop de tentatives. Réessayez plus tard.',
+      'auth/invalid-credential': 'Email ou mot de passe incorrect.',
     };
     showLoginError(msgs[e.code] || 'Erreur de connexion: ' + e.message);
   }
@@ -1152,19 +1219,42 @@ function loadSettings() {
   if(cfg) document.getElementById('s-firebase').value = cfg;
 }
 
-window.saveAccountSettings = () => {
+window.saveAccountSettings = async () => {
   const s = JSON.parse(localStorage.getItem('academySettings') || '{}');
-  s.name = document.getElementById('s-name').value;
-  s.email = document.getElementById('s-email').value;
+  s.name = document.getElementById('s-name').value.trim();
+  s.email = document.getElementById('s-email').value.trim();
   const pwd = document.getElementById('s-pwd').value;
+  const pwd2 = document.getElementById('s-pwd2').value;
   if(pwd) {
+    if(pwd.length < 6) { showToast('❌ Mot de passe trop court (min. 6 caractères).', 'error'); return; }
+    if(pwd !== pwd2) { showToast('❌ Les mots de passe ne correspondent pas.', 'error'); return; }
+    // Hash password with SHA-256 for localStorage storage
+    const hashBuffer = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(pwd));
+    const hashHex = Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2,'0')).join('');
     localStorage.setItem('adminEmail', s.email);
-    localStorage.setItem('adminPwd', pwd);
+    localStorage.setItem('adminPwdHash', hashHex);
+    localStorage.removeItem('adminPwd'); // Remove plain text if existed
+    document.getElementById('s-pwd').value = '';
+    document.getElementById('s-pwd2').value = '';
+    // Update Firebase Auth if connected
+    if(window._currentUser && window._fbReady) {
+      try {
+        const { updatePassword, updateEmail } = await import("https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js");
+        if(s.email !== window._currentUser.email) await updateEmail(window._currentUser, s.email);
+        if(pwd) await updatePassword(window._currentUser, pwd);
+        showToast('✅ Compte mis à jour (Firebase + local) !', 'success');
+      } catch(e) {
+        showToast('⚠️ Local OK. Firebase: ' + (e.code || e.message), 'error');
+      }
+    } else {
+      showToast('✅ Identifiants mis à jour (mode local) !', 'success');
+    }
+  } else {
+    showToast('✅ Paramètres compte sauvegardés !', 'success');
   }
   localStorage.setItem('academySettings', JSON.stringify(s));
   document.getElementById('adminName').textContent = s.name || 'Admin';
   document.getElementById('avatarInitial').textContent = (s.name || 'A').charAt(0).toUpperCase();
-  showToast('✅ Paramètres compte sauvegardés !', 'success');
 };
 
 window.saveAcademySettings = () => {
@@ -1259,7 +1349,8 @@ window.navigate = (page) => {
     dashboard: ['Vue d\'ensemble', 'Tableau de bord — Progress Elit Academy'],
     inscriptions: ['Inscriptions', 'Gérer toutes les inscriptions'],
     messages: ['Messages', 'Messages reçus des parents'],
-    settings: ['Paramètres', 'Configuration de l\'application']
+    settings: ['Paramètres', 'Configuration de l\'application'],
+    database: ['Base de données', 'Visualiser et gérer les collections']
   };
   const [title, sub] = titles[page] || [page, ''];
   document.getElementById('pageTitle').innerHTML = title + `<span>${sub}</span>`;
@@ -1284,6 +1375,89 @@ document.addEventListener('keydown', e => {
     document.body.style.overflow = '';
   }
 });
+
+/* ── Database Viewer ── */
+let _currentDBCollection = 'inscriptions';
+
+window.loadDB = (colName) => {
+  _currentDBCollection = colName;
+  // Highlight active tab
+  document.querySelectorAll('[id^="dbtab-"]').forEach(b => {
+    b.className = b.id === 'dbtab-' + colName ? 'topbar-btn primary' : 'topbar-btn secondary';
+    b.style.cssText = b.id === 'dbtab-' + colName ? 'font-size:13px;padding:9px 16px' : 'font-size:13px;padding:9px 16px';
+  });
+  const data = colName === 'inscriptions' ? window._inscriptions : window._messages;
+  renderDBTable(colName, data);
+};
+
+function renderDBTable(colName, data) {
+  const wrap = document.getElementById('dbTableWrap');
+  const stats = document.getElementById('dbStats');
+  stats.innerHTML = `<span>📦 Collection : <strong>${colName}</strong></span> · <span>📄 ${data.length} enregistrement(s)</span> · <span>💾 ${window._db ? '<span style="color:var(--green);font-weight:600">Firestore</span>' : '<span style="color:var(--yellow);font-weight:600">localStorage</span>'}</span>`;
+
+  if (!data.length) {
+    wrap.innerHTML = '<div style="padding:48px;text-align:center;color:var(--muted)">Aucun enregistrement dans cette collection.</div>';
+    return;
+  }
+
+  // Collect all unique keys
+  const allKeys = [...new Set(data.flatMap(r => Object.keys(r).filter(k => !['_docRef','_id'].includes(k))))];
+  // Limit to sensible columns
+  const priorityKeys = colName === 'inscriptions'
+    ? ['id','parent','enfant','domaines','statut','paiement','createdAt']
+    : ['id','prenom','nom','email','tel','message','type','createdAt'];
+  const keys = [...new Set([...priorityKeys.filter(k => allKeys.includes(k)), ...allKeys])].slice(0, 10);
+
+  const thead = keys.map(k => `<th>${k.toUpperCase()}</th>`).join('');
+  const tbody = data.map(row => {
+    const cells = keys.map(k => {
+      let v = row[k];
+      if (v === undefined || v === null) return '<td style="color:var(--muted)">—</td>';
+      if (typeof v === 'object' && !Array.isArray(v)) v = JSON.stringify(v);
+      if (Array.isArray(v)) v = v.join(', ');
+      if (typeof v === 'string' && v.length > 60) v = v.slice(0, 60) + '…';
+      return `<td title="${String(v).replace(/"/g,'&quot;')}">${v}</td>`;
+    }).join('');
+    const id = row.id || '';
+    return `<tr>${cells}<td><button class="action-btn del" title="Supprimer" onclick="dbDeleteRow('${colName}','${id}')"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/></svg></button></td>`;
+  }).join('');
+
+  wrap.innerHTML = `<div style="overflow-x:auto"><table><thead><tr>${thead}<th></th></tr></thead><tbody>${tbody}</tbody></table></div>`;
+}
+
+window.dbDeleteRow = async (colName, id) => {
+  if (!id) { showToast('❌ ID introuvable', 'error'); return; }
+  if (!confirm('Supprimer cet enregistrement ?')) return;
+  await deleteRecord(colName, id);
+  if (colName === 'inscriptions') {
+    window._inscriptions = window._inscriptions.filter(r => r.id !== id);
+  } else {
+    window._messages = window._messages.filter(r => r.id !== id);
+  }
+  updateStats();
+  loadDB(colName);
+  showToast('🗑️ Enregistrement supprimé.', 'success');
+};
+
+window.exportDBJSON = () => {
+  const data = _currentDBCollection === 'inscriptions' ? window._inscriptions : window._messages;
+  if (!data.length) { showToast('Aucune donnée à exporter.', 'error'); return; }
+  const a = document.createElement('a');
+  a.href = 'data:application/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(data, null, 2));
+  a.download = `${_currentDBCollection}_${new Date().toISOString().split('T')[0]}.json`;
+  a.click();
+  showToast('📥 Export JSON téléchargé !', 'success');
+};
+
+window.clearDB = () => {
+  if (!confirm(`⚠️ Vider toute la collection "${_currentDBCollection}" ? Cette action est irréversible.`)) return;
+  localStorage.setItem(_currentDBCollection, '[]');
+  if (_currentDBCollection === 'inscriptions') window._inscriptions = [];
+  else window._messages = [];
+  updateStats();
+  loadDB(_currentDBCollection);
+  showToast(`🗑️ Collection "${_currentDBCollection}" vidée.`, 'success');
+};
 </script>
 </body>
 </html>
