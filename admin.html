@@ -655,12 +655,13 @@ tr:hover td{background:#fafafa}
             <div class="settings-field">
               <label class="settings-label">FIREBASE CONFIG (JSON) — cole le contenu du fichier firebaseConfig</label>
               <textarea id="s-firebase" placeholder='{
-  "apiKey": "AIzaSy...",
-  "authDomain": "votre-projet.firebaseapp.com",
-  "projectId": "votre-projet",
-  "storageBucket": "votre-projet.appspot.com",
-  "messagingSenderId": "123456789",
-  "appId": "1:123456789:web:abc..."
+  "apiKey": "AIzaSyAM4u3CacEiKjya6FsE3NiCHqYDE8wWPAs",
+  "authDomain": "progress-elit-academy.firebaseapp.com",
+  "projectId": "progress-elit-academy",
+  "storageBucket": "progress-elit-academy.firebasestorage.app",
+  "messagingSenderId": "36623697986",
+  "appId": "1:36623697986:web:2b4601781ee10d8b7105db",
+  "measurementId": "G-EWFYSLNTHQ"
 }'></textarea>
             </div>
             <button class="settings-save" onclick="saveFirebaseConfig()">
@@ -1458,6 +1459,23 @@ window.clearDB = () => {
   loadDB(_currentDBCollection);
   showToast(`🗑️ Collection "${_currentDBCollection}" vidée.`, 'success');
 };
+</script>
+
+<script>
+// Auto-seed Firebase config on first visit
+(function(){
+  if(!localStorage.getItem('fbConfig')) {
+    const cfg = JSON.stringify({
+      apiKey:"AIzaSyAM4u3CacEiKjya6FsE3NiCHqYDE8wWPAs",
+      authDomain:"progress-elit-academy.firebaseapp.com",
+      projectId:"progress-elit-academy",
+      messagingSenderId:"36623697986",
+      appId:"1:36623697986:web:2b4601781ee10d8b7105db",
+    });
+    localStorage.setItem('fbConfig', cfg);
+    console.log('Firebase config auto-seeded');
+  }
+})();
 </script>
 </body>
 </html>
