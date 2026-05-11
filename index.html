@@ -1,729 +1,762 @@
 <!DOCTYPE html>
 <html lang="fr" dir="ltr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Progress Academy</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Cairo:wght@400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
-  <style>
-    :root {
-      --bg: #050d1a;
-      --surface: #0a1628;
-      --card: #0f1f38;
-      --accent1: #00e5ff;
-      --accent2: #ff6b35;
-      --accent3: #7fff5f;
-      --text: #e8f4f8;
-      --muted: #7a9ab5;
-      --border: rgba(0,229,255,0.15);
-      --glow: 0 0 30px rgba(0,229,255,0.25);
-    }
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Progress Elit Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Cairo:wght@300;400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#faf8f5;--bg2:#f3ede4;--dark:#1a1208;--gold:#c9922a;--gold2:#e8b84b;
+  --teal:#1a6b5a;--teal2:#25a085;--text:#2d2416;--muted:#7a6a54;
+  --white:#ffffff;--border:#e8dfd0;--radius:14px;
+  --shadow:0 4px 32px rgba(26,12,8,0.10);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;overflow-x:hidden}
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+/* NAVBAR */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;
+  justify-content:space-between;padding:14px 40px;
+  background:rgba(250,248,245,0.93);backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--border);transition:box-shadow .3s}
+nav.scrolled{box-shadow:0 2px 20px rgba(26,12,8,0.12)}
+.nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.nav-logo-icon{width:40px;height:40px;border-radius:10px;
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  display:flex;align-items:center;justify-content:center;font-size:20px}
+.nav-brand-text{font-family:'Playfair Display',serif;font-size:17px;color:var(--dark);font-weight:700;line-height:1.1}
+.nav-brand-text span{font-size:10px;display:block;color:var(--gold);letter-spacing:.2em;font-family:'DM Sans',sans-serif;font-weight:400}
+.nav-links{display:flex;gap:28px;list-style:none}
+.nav-links a{text-decoration:none;color:var(--muted);font-size:14px;font-weight:500;transition:color .2s}
+.nav-links a:hover{color:var(--gold)}
+.nav-right{display:flex;align-items:center;gap:12px}
+.lang-sw{display:flex;gap:6px}
+.lbtn{background:none;border:1px solid var(--border);color:var(--muted);
+  padding:4px 12px;border-radius:100px;font-size:12px;cursor:pointer;
+  transition:all .2s;font-family:'Cairo',sans-serif}
+.lbtn.active,.lbtn:hover{border-color:var(--gold);color:var(--gold)}
+.nav-cta{background:var(--gold);color:#fff;border:none;border-radius:100px;
+  padding:10px 22px;font-size:14px;font-weight:500;cursor:pointer;
+  transition:all .2s;font-family:'DM Sans',sans-serif}
+.nav-cta:hover{background:var(--dark)}
 
-    html { scroll-behavior: smooth; }
+/* LANG */
+.ls{display:none}.ls.active{display:block}
 
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Space Mono', monospace;
-      overflow-x: hidden;
-      cursor: none;
-    }
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;padding:110px 40px 70px;
+  position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;z-index:0;
+  background:radial-gradient(ellipse 70% 60% at 80% 50%,rgba(201,146,42,.12) 0%,transparent 70%),
+    radial-gradient(ellipse 50% 80% at 10% 80%,rgba(26,107,90,.08) 0%,transparent 60%),var(--bg)}
+.hero-deco{position:absolute;right:-80px;top:50%;transform:translateY(-50%);
+  width:520px;height:520px;border-radius:50%;
+  background:linear-gradient(135deg,var(--gold2),var(--gold));
+  opacity:.08;filter:blur(60px);pointer-events:none}
+.hero-inner{position:relative;z-index:1;max-width:1100px;margin:0 auto;
+  display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;width:100%}
+.hero-pill{display:inline-flex;align-items:center;gap:8px;
+  background:rgba(201,146,42,.12);border:1px solid rgba(201,146,42,.3);
+  border-radius:100px;padding:6px 18px;font-size:13px;color:var(--gold);margin-bottom:24px}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(36px,5vw,70px);
+  line-height:1.08;color:var(--dark);margin-bottom:12px}
+.hero-title em{color:var(--gold);font-style:normal}
+.hero-sub{font-family:'Cairo',sans-serif;font-size:17px;color:var(--muted);
+  line-height:1.7;margin-bottom:36px;max-width:480px}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap}
+.btn-primary{background:var(--gold);color:#fff;border:none;border-radius:100px;
+  padding:14px 30px;font-size:15px;font-weight:500;cursor:pointer;
+  transition:all .25s;font-family:'DM Sans',sans-serif}
+.btn-primary:hover{background:var(--dark);transform:translateY(-2px);box-shadow:0 8px 24px rgba(201,146,42,.3)}
+.btn-outline{background:transparent;border:1.5px solid var(--border);color:var(--text);
+  border-radius:100px;padding:14px 28px;font-size:15px;cursor:pointer;
+  transition:all .25s;font-family:'DM Sans',sans-serif}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold)}
+.hero-badges{display:flex;gap:12px;margin-top:36px;flex-wrap:wrap}
+.badge{background:var(--white);border:1px solid var(--border);border-radius:10px;
+  padding:14px 18px;display:flex;flex-direction:column;align-items:center;
+  gap:4px;box-shadow:var(--shadow);min-width:90px}
+.badge-num{font-family:'Playfair Display',serif;font-size:26px;color:var(--gold);font-weight:700}
+.badge-lbl{font-size:11px;color:var(--muted);text-align:center}
+.hero-card-main{background:var(--white);border-radius:24px;box-shadow:0 20px 60px rgba(26,12,8,0.15);overflow:hidden}
+.hero-card-top{background:linear-gradient(135deg,var(--teal),var(--teal2));
+  padding:32px;text-align:center;color:#fff}
+.hero-card-top .big-emoji{font-size:64px;display:block;margin-bottom:10px}
+.hero-card-top h3{font-family:'Playfair Display',serif;font-size:20px}
+.hero-card-body{padding:20px}
+.hc-row{display:flex;align-items:center;gap:12px;padding:10px 0;
+  border-bottom:1px solid var(--border)}
+.hc-row:last-child{border:none}
+.hc-icon{width:36px;height:36px;border-radius:8px;background:rgba(201,146,42,.1);
+  display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.hc-info{font-size:14px;color:var(--text);font-weight:500}
+.hc-sub{font-size:12px;color:var(--muted)}
+.float-tag{position:absolute;background:var(--white);border-radius:12px;padding:10px 16px;
+  box-shadow:0 8px 24px rgba(26,12,8,.15);font-size:13px;font-weight:500;
+  display:flex;align-items:center;gap:8px;animation:float 3s ease-in-out infinite}
+.float-tag.t1{top:-20px;right:20px}
+.float-tag.t2{bottom:20px;left:-30px;animation-delay:1.5s}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 
-    /* Custom cursor */
-    .cursor {
-      width: 16px; height: 16px;
-      border: 2px solid var(--accent1);
-      border-radius: 50%;
-      position: fixed; top: 0; left: 0;
-      pointer-events: none; z-index: 9999;
-      transform: translate(-50%, -50%);
-      transition: transform 0.1s, border-color 0.2s;
-      mix-blend-mode: screen;
-    }
-    .cursor-dot {
-      width: 4px; height: 4px;
-      background: var(--accent1);
-      border-radius: 50%;
-      position: fixed; top: 0; left: 0;
-      pointer-events: none; z-index: 9999;
-      transform: translate(-50%, -50%);
-    }
+/* SECTIONS */
+.section{padding:90px 40px}
+.container{max-width:1100px;margin:0 auto}
+.section-header{text-align:center;margin-bottom:60px}
+.section-tag{display:inline-block;background:rgba(201,146,42,.1);color:var(--gold);
+  border-radius:100px;padding:6px 20px;font-size:12px;letter-spacing:.15em;margin-bottom:14px}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(26px,4vw,46px);
+  color:var(--dark);margin-bottom:14px}
+.section-desc{font-family:'Cairo',sans-serif;font-size:17px;color:var(--muted);
+  max-width:560px;margin:0 auto;line-height:1.7}
+.alt-bg{background:var(--bg2)}
 
-    /* Grid background */
-    body::before {
-      content: '';
-      position: fixed; inset: 0;
-      background-image:
-        linear-gradient(rgba(0,229,255,0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0,229,255,0.03) 1px, transparent 1px);
-      background-size: 40px 40px;
-      pointer-events: none; z-index: 0;
-    }
+/* ACTIVITIES */
+.act-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:24px}
+.act-card{background:var(--white);border-radius:var(--radius);overflow:hidden;
+  box-shadow:var(--shadow);transition:transform .3s,box-shadow .3s;cursor:pointer}
+.act-card:hover{transform:translateY(-6px);box-shadow:0 16px 48px rgba(26,12,8,.15)}
+.act-img{height:170px;display:flex;align-items:center;justify-content:center;font-size:58px}
+.c1{background:linear-gradient(135deg,#1a6b5a,#25a085)}
+.c2{background:linear-gradient(135deg,#c9922a,#e8b84b)}
+.c3{background:linear-gradient(135deg,#2a4ac9,#4a7ae8)}
+.c4{background:linear-gradient(135deg,#c92a6b,#e84ab8)}
+.act-body{padding:20px}
+.act-name{font-family:'Playfair Display',serif;font-size:18px;color:var(--dark);margin-bottom:6px}
+.act-desc{font-family:'Cairo',sans-serif;font-size:14px;color:var(--muted);line-height:1.6}
+.act-tag{display:inline-block;margin-top:12px;background:rgba(26,107,90,.1);
+  color:var(--teal);border-radius:100px;padding:4px 12px;font-size:12px}
 
-    /* Lang switcher */
-    .lang-bar {
-      position: fixed; top: 0; left: 0; right: 0;
-      z-index: 100;
-      display: flex; justify-content: flex-end; align-items: center;
-      padding: 12px 32px;
-      background: rgba(5,13,26,0.85);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-    }
+/* GALLERY */
+.media-tabs{display:flex;gap:8px;justify-content:center;margin-bottom:36px;flex-wrap:wrap}
+.mtab{background:var(--white);border:1.5px solid var(--border);border-radius:100px;
+  padding:8px 22px;font-size:14px;cursor:pointer;transition:all .2s;color:var(--muted)}
+.mtab.active{background:var(--gold);border-color:var(--gold);color:#fff}
+.media-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.media-item{border-radius:12px;overflow:hidden;aspect-ratio:4/3;
+  display:flex;align-items:center;justify-content:center;font-size:52px;
+  cursor:pointer;border:2px solid transparent;transition:all .3s;position:relative}
+.media-item:hover{border-color:var(--gold);transform:scale(1.02)}
+.media-overlay{position:absolute;inset:0;background:rgba(26,12,8,.5);
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;transition:opacity .3s;color:#fff;font-size:30px}
+.media-item:hover .media-overlay{opacity:1}
+.play-btn{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  background:rgba(26,12,8,.3);color:#fff;font-size:40px}
 
-    .lang-btns { display: flex; gap: 8px; }
+/* CONTACT */
+.contact-grid{display:grid;grid-template-columns:1fr 1.3fr;gap:60px;align-items:start}
+.contact-info h3{font-family:'Playfair Display',serif;font-size:26px;margin-bottom:14px;color:var(--dark)}
+.contact-info p{font-family:'Cairo',sans-serif;color:var(--muted);line-height:1.7;margin-bottom:28px;font-size:15px}
+.ci{display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid var(--border)}
+.ci-icon{width:42px;height:42px;border-radius:10px;background:rgba(201,146,42,.1);
+  display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.ci-lbl{font-size:12px;color:var(--muted)}
+.ci-val{font-size:15px;color:var(--dark);font-weight:500}
+.form-card{background:var(--white);border-radius:20px;padding:36px;box-shadow:var(--shadow)}
+.form-title{font-family:'Playfair Display',serif;font-size:22px;margin-bottom:24px;color:var(--dark)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.form-group{margin-bottom:16px;display:flex;flex-direction:column;gap:6px}
+.form-label{font-size:13px;color:var(--muted);font-weight:500}
+.form-input,.form-select,.form-textarea{
+  width:100%;padding:12px 16px;border:1.5px solid var(--border);border-radius:10px;
+  font-size:14px;color:var(--text);background:var(--bg);
+  font-family:'DM Sans',sans-serif;transition:border-color .2s,box-shadow .2s;outline:none}
+.form-input:focus,.form-select:focus,.form-textarea:focus{
+  border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,146,42,.12)}
+.form-textarea{resize:vertical;min-height:100px}
+.form-submit{width:100%;padding:14px;background:var(--gold);color:#fff;border:none;
+  border-radius:10px;font-size:15px;font-weight:500;cursor:pointer;
+  transition:all .25s;font-family:'DM Sans',sans-serif}
+.form-submit:hover{background:var(--dark)}
+.form-success{display:none;background:rgba(26,107,90,.1);border:1px solid var(--teal2);
+  border-radius:10px;padding:16px;text-align:center;color:var(--teal);
+  font-family:'Cairo',sans-serif;margin-top:12px}
 
-    .lang-btn {
-      background: none;
-      border: 1px solid var(--border);
-      color: var(--muted);
-      padding: 5px 14px;
-      border-radius: 4px;
-      cursor: pointer;
-      font-family: 'Cairo', sans-serif;
-      font-size: 13px;
-      transition: all 0.2s;
-      letter-spacing: 0.05em;
-    }
-    .lang-btn.active,
-    .lang-btn:hover {
-      border-color: var(--accent1);
-      color: var(--accent1);
-      box-shadow: 0 0 10px rgba(0,229,255,0.2);
-    }
+/* MODAL */
+.modal-overlay{display:none;position:fixed;inset:0;z-index:500;
+  background:rgba(26,12,8,.6);backdrop-filter:blur(8px);
+  align-items:center;justify-content:center;padding:20px}
+.modal-overlay.open{display:flex}
+.modal{background:var(--white);border-radius:24px;padding:40px;max-width:600px;
+  width:100%;max-height:90vh;overflow-y:auto;position:relative;
+  box-shadow:0 32px 80px rgba(26,12,8,.25)}
+.modal-close{position:absolute;top:16px;right:16px;background:var(--bg2);border:none;
+  width:36px;height:36px;border-radius:50%;font-size:18px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;color:var(--muted);transition:all .2s}
+.modal-close:hover{background:var(--gold);color:#fff}
+.modal-title{font-family:'Playfair Display',serif;font-size:26px;color:var(--dark);margin-bottom:6px}
+.modal-sub{font-family:'Cairo',sans-serif;font-size:14px;color:var(--muted);margin-bottom:28px}
+.step-bar{display:flex;gap:6px;margin-bottom:28px}
+.step-dot{height:4px;flex:1;border-radius:4px;background:var(--border);transition:.3s}
+.step-dot.done{background:var(--gold)}
+.step-cnt{display:none}.step-cnt.active{display:block}
+.step-lbl{margin-bottom:16px;color:var(--muted);font-size:12px;letter-spacing:.12em}
+.modal-nav{display:flex;gap:12px;margin-top:24px;justify-content:flex-end}
+.btn-next{background:var(--gold);color:#fff;border:none;border-radius:10px;
+  padding:12px 28px;font-size:14px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:.2s}
+.btn-next:hover{background:var(--dark)}
+.btn-back{background:none;border:1.5px solid var(--border);color:var(--muted);
+  border-radius:10px;padding:12px 22px;font-size:14px;cursor:pointer;
+  font-family:'DM Sans',sans-serif;transition:.2s}
+.btn-back:hover{border-color:var(--gold);color:var(--gold)}
+.check-group{display:flex;flex-direction:column;gap:10px}
+.check-item{display:flex;align-items:center;gap:10px;padding:12px 14px;
+  border:1.5px solid var(--border);border-radius:10px;cursor:pointer;transition:.2s;font-size:14px}
+.check-item:hover,.check-item.sel{border-color:var(--gold);background:rgba(201,146,42,.06)}
+.check-item input{accent-color:var(--gold)}
+.recap-box{background:var(--bg2);border-radius:12px;padding:20px;margin-bottom:20px;
+  font-family:'Cairo',sans-serif;font-size:14px;line-height:2.2;color:var(--text)}
+.success-modal{text-align:center;padding:20px 0}
+.success-icon{font-size:64px;margin-bottom:16px}
+.success-modal h3{font-family:'Playfair Display',serif;font-size:24px;color:var(--teal);margin-bottom:10px}
+.success-modal p{font-family:'Cairo',sans-serif;color:var(--muted);line-height:1.7}
 
-    /* Sections visibility */
-    .lang-section { display: none; }
-    .lang-section.active { display: block; }
+/* FOOTER */
+footer{background:var(--dark);color:#b8a88a;padding:60px 40px 30px}
+.footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:48px;margin-bottom:48px}
+.footer-brand h2{font-family:'Playfair Display',serif;color:#fff;font-size:22px;margin-bottom:8px}
+.footer-brand p{font-family:'Cairo',sans-serif;font-size:14px;line-height:1.7;color:#8a7a62}
+.footer-col h4{color:#fff;font-size:13px;margin-bottom:16px;letter-spacing:.1em}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+.footer-col ul li a{color:#8a7a62;text-decoration:none;font-size:14px;transition:.2s}
+.footer-col ul li a:hover{color:var(--gold2)}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.06);padding-top:24px;
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.footer-bottom p{font-size:13px}
 
-    /* ===================== HERO ===================== */
-    .hero {
-      min-height: 100vh;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      position: relative; z-index: 1;
-      padding: 100px 20px 60px;
-      text-align: center;
-      overflow: hidden;
-    }
+/* TOAST */
+.toast{position:fixed;bottom:32px;right:32px;z-index:999;
+  background:var(--dark);color:#fff;border-radius:12px;padding:14px 22px;
+  font-size:14px;font-family:'Cairo',sans-serif;
+  transform:translateY(80px);opacity:0;transition:.4s;
+  box-shadow:0 8px 24px rgba(0,0,0,.3);max-width:320px}
+.toast.show{transform:translateY(0);opacity:1}
+.toast.success{border-left:4px solid var(--teal2)}
+.toast.error{border-left:4px solid #e84a4a}
 
-    .hero::after {
-      content: '';
-      position: absolute;
-      width: 600px; height: 600px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(0,229,255,0.08) 0%, transparent 70%);
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      pointer-events: none;
-      animation: pulse 4s ease-in-out infinite;
-    }
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s,transform .7s}
+.reveal.visible{opacity:1;transform:none}
 
-    @keyframes pulse {
-      0%, 100% { transform: translate(-50%,-50%) scale(1); opacity: 0.7; }
-      50% { transform: translate(-50%,-50%) scale(1.15); opacity: 1; }
-    }
-
-    .hero-badge {
-      display: inline-block;
-      border: 1px solid var(--accent1);
-      color: var(--accent1);
-      font-size: 11px;
-      letter-spacing: 0.25em;
-      padding: 6px 20px;
-      border-radius: 2px;
-      margin-bottom: 28px;
-      animation: fadeDown 0.8s ease both;
-    }
-
-    .hero-logo {
-      font-family: 'Orbitron', sans-serif;
-      font-size: clamp(48px, 9vw, 110px);
-      font-weight: 900;
-      line-height: 1;
-      background: linear-gradient(135deg, #fff 0%, var(--accent1) 50%, var(--accent2) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      margin-bottom: 8px;
-      animation: fadeDown 0.9s 0.1s ease both;
-      position: relative; z-index: 1;
-    }
-
-    .hero-sub {
-      font-family: 'Orbitron', sans-serif;
-      font-size: clamp(14px, 2.5vw, 22px);
-      color: var(--accent2);
-      letter-spacing: 0.3em;
-      margin-bottom: 32px;
-      animation: fadeDown 0.9s 0.2s ease both;
-    }
-
-    .hero-tagline {
-      font-family: 'Cairo', sans-serif;
-      font-size: clamp(16px, 2.5vw, 22px);
-      color: var(--muted);
-      max-width: 640px;
-      line-height: 1.7;
-      margin-bottom: 48px;
-      animation: fadeDown 0.9s 0.3s ease both;
-    }
-
-    .hero-age {
-      display: inline-flex; align-items: center; gap: 10px;
-      background: rgba(255,107,53,0.12);
-      border: 1px solid rgba(255,107,53,0.4);
-      border-radius: 100px;
-      padding: 10px 28px;
-      color: var(--accent2);
-      font-size: 15px;
-      animation: fadeDown 0.9s 0.4s ease both;
-    }
-
-    .hero-age .icon { font-size: 20px; }
-
-    @keyframes fadeDown {
-      from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* Scroll indicator */
-    .scroll-hint {
-      position: absolute; bottom: 36px; left: 50%;
-      transform: translateX(-50%);
-      display: flex; flex-direction: column; align-items: center; gap: 6px;
-      color: var(--muted); font-size: 11px; letter-spacing: 0.2em;
-      animation: fadeDown 1s 0.8s ease both;
-    }
-    .scroll-hint span {
-      width: 1px; height: 40px;
-      background: linear-gradient(to bottom, var(--accent1), transparent);
-      animation: scrollLine 1.5s ease-in-out infinite;
-    }
-    @keyframes scrollLine {
-      0% { transform: scaleY(0); transform-origin: top; }
-      50% { transform: scaleY(1); transform-origin: top; }
-      51% { transform: scaleY(1); transform-origin: bottom; }
-      100% { transform: scaleY(0); transform-origin: bottom; }
-    }
-
-    /* ===================== SECTIONS ===================== */
-    section { position: relative; z-index: 1; }
-
-    .section-wrapper {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 80px 24px;
-    }
-
-    .section-label {
-      font-size: 11px;
-      letter-spacing: 0.3em;
-      color: var(--accent1);
-      margin-bottom: 12px;
-    }
-
-    .section-title {
-      font-family: 'Orbitron', sans-serif;
-      font-size: clamp(26px, 4vw, 42px);
-      font-weight: 700;
-      margin-bottom: 20px;
-      background: linear-gradient(90deg, var(--text), var(--muted));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-    }
-
-    .section-divider {
-      width: 60px; height: 3px;
-      background: linear-gradient(90deg, var(--accent1), var(--accent2));
-      border-radius: 2px;
-      margin-bottom: 48px;
-    }
-
-    /* ===================== DOMAINS GRID ===================== */
-    .domains-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 20px;
-    }
-
-    .domain-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 32px 24px;
-      text-align: center;
-      transition: all 0.3s;
-      position: relative; overflow: hidden;
-    }
-
-    .domain-card::before {
-      content: '';
-      position: absolute; top: 0; left: 0; right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, var(--accent1), var(--accent2));
-      transform: scaleX(0);
-      transition: transform 0.3s;
-    }
-
-    .domain-card:hover {
-      border-color: rgba(0,229,255,0.4);
-      box-shadow: var(--glow);
-      transform: translateY(-4px);
-    }
-    .domain-card:hover::before { transform: scaleX(1); }
-
-    .domain-icon {
-      font-size: 48px;
-      display: block;
-      margin-bottom: 16px;
-      filter: drop-shadow(0 0 12px rgba(0,229,255,0.4));
-    }
-
-    .domain-name-fr { font-family: 'Orbitron', sans-serif; font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
-    .domain-name-ar { font-family: 'Cairo', sans-serif; font-size: 15px; color: var(--accent1); direction: rtl; margin-bottom: 4px; }
-    .domain-name-en { font-size: 12px; color: var(--muted); letter-spacing: 0.1em; }
-
-    /* ===================== STATS ===================== */
-    .stats-row {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 20px;
-      margin-top: 60px;
-    }
-
-    .stat-box {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 28px 20px;
-      text-align: center;
-    }
-
-    .stat-num {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 40px;
-      color: var(--accent1);
-      font-weight: 900;
-      display: block;
-    }
-
-    .stat-label {
-      font-family: 'Cairo', sans-serif;
-      font-size: 14px;
-      color: var(--muted);
-      margin-top: 6px;
-    }
-
-    /* ===================== ABOUT ===================== */
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 48px;
-      align-items: center;
-    }
-
-    @media (max-width: 700px) { .about-grid { grid-template-columns: 1fr; } }
-
-    .about-text {
-      font-family: 'Cairo', sans-serif;
-      font-size: 17px;
-      line-height: 1.9;
-      color: var(--muted);
-    }
-
-    .about-text strong { color: var(--accent1); }
-
-    .vision-block {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-left: 4px solid var(--accent2);
-      border-radius: 8px;
-      padding: 28px;
-    }
-
-    .vision-block h3 {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 16px;
-      color: var(--accent2);
-      margin-bottom: 12px;
-    }
-
-    .vision-block p {
-      font-family: 'Cairo', sans-serif;
-      font-size: 15px;
-      color: var(--muted);
-      line-height: 1.8;
-    }
-
-    /* ===================== FOOTER ===================== */
-    footer {
-      position: relative; z-index: 1;
-      border-top: 1px solid var(--border);
-      text-align: center;
-      padding: 40px 20px;
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    footer .footer-logo {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 20px;
-      color: var(--accent1);
-      margin-bottom: 10px;
-    }
-
-    /* ===================== RTL support ===================== */
-    [dir="rtl"] .section-divider { margin-right: 0; }
-    [dir="rtl"] .vision-block { border-left: none; border-right: 4px solid var(--accent2); }
-
-    /* Stars */
-    .stars {
-      position: fixed; inset: 0; z-index: 0;
-      pointer-events: none;
-      overflow: hidden;
-    }
-    .star {
-      position: absolute;
-      background: white;
-      border-radius: 50%;
-      animation: twinkle var(--d) ease-in-out infinite;
-    }
-    @keyframes twinkle {
-      0%, 100% { opacity: 0.1; }
-      50% { opacity: 0.8; }
-    }
-
-    /* Nav dots */
-    .nav-dots {
-      position: fixed; right: 24px; top: 50%;
-      transform: translateY(-50%);
-      display: flex; flex-direction: column; gap: 10px;
-      z-index: 99;
-    }
-    .nav-dot {
-      width: 8px; height: 8px;
-      border-radius: 50%;
-      border: 1px solid var(--muted);
-      cursor: pointer;
-      transition: all 0.3s;
-    }
-    .nav-dot.active { background: var(--accent1); border-color: var(--accent1); box-shadow: 0 0 8px var(--accent1); }
-
-    @media (max-width: 768px) {
-      .nav-dots { display: none; }
-      body { cursor: auto; }
-      .cursor, .cursor-dot { display: none; }
-    }
-  </style>
+/* RESPONSIVE */
+@media(max-width:900px){
+  .hero-inner{grid-template-columns:1fr}.hero-visual{display:none}
+  .contact-grid{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .media-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:640px){
+  nav{padding:12px 20px}.nav-links{display:none}
+  .section{padding:60px 20px}.hero{padding:90px 20px 50px}
+  .media-grid{grid-template-columns:1fr}.form-row{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr}
+}
+[dir=rtl] .modal-close{right:auto;left:16px}
+</style>
 </head>
 <body>
 
-<!-- Custom cursor -->
-<div class="cursor" id="cursor"></div>
-<div class="cursor-dot" id="cursorDot"></div>
+<nav id="navbar">
+  <a class="nav-brand" href="#">
+    <div class="nav-logo-icon">🎓</div>
+    <div class="nav-brand-text">Progress Elit Academy<span>EXCELLENCE · INNOVATION · AVENIR</span></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#activites">Activités</a></li>
+    <li><a href="#galerie">Galerie</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="admin.html" style="color:var(--gold)">⚙️ Admin</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="lang-sw">
+      <button class="lbtn active" data-lang="fr">FR</button>
+      <button class="lbtn" data-lang="ar">AR</button>
+      <button class="lbtn" data-lang="en">EN</button>
+    </div>
+    <button class="nav-cta" onclick="openModal()">S'inscrire</button>
+  </div>
+</nav>
 
-<!-- Stars background -->
-<div class="stars" id="stars"></div>
+<!-- ════ FRENCH ════ -->
+<div class="ls active" id="ls-fr">
+<section class="hero">
+  <div class="hero-bg"></div><div class="hero-deco"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-pill">🌟 Académie d'Excellence · Sfax, Tunisie</div>
+      <h1 class="hero-title">Progress<br><em>Elit</em><br>Academy</h1>
+      <p class="hero-sub">Former les talents de demain dès <strong>6 ans</strong> — informatique, robotique, anglais et bricolage créatif dans un environnement innovant et bienveillant.</p>
+      <div class="hero-actions">
+        <button class="btn-primary" onclick="openModal()">📋 S'inscrire maintenant</button>
+        <button class="btn-outline" onclick="scrollTo('activites')">Découvrir →</button>
+      </div>
+      <div class="hero-badges">
+        <div class="badge"><div class="badge-num">6+</div><div class="badge-lbl">Ans minimum</div></div>
+        <div class="badge"><div class="badge-num">4</div><div class="badge-lbl">Domaines</div></div>
+        <div class="badge"><div class="badge-num">3</div><div class="badge-lbl">Langues</div></div>
+        <div class="badge"><div class="badge-num">100%</div><div class="badge-lbl">Pratique</div></div>
+      </div>
+    </div>
+    <div class="hero-visual" style="position:relative">
+      <div class="float-tag t1">🤖 Robotique avancée</div>
+      <div class="hero-card-main">
+        <div class="hero-card-top">
+          <span class="big-emoji">🚀</span>
+          <h3>L'avenir commence ici</h3>
+          <p style="font-size:13px;opacity:.8;margin-top:6px">Des enfants qui créent, pas seulement qui consomment</p>
+        </div>
+        <div class="hero-card-body">
+          <div class="hc-row"><div class="hc-icon">💻</div><div><div class="hc-info">Informatique & Codage</div><div class="hc-sub">Scratch, Python, Web</div></div></div>
+          <div class="hc-row"><div class="hc-icon">🤖</div><div><div class="hc-info">Robotique</div><div class="hc-sub">Arduino, Lego Technic</div></div></div>
+          <div class="hc-row"><div class="hc-icon">🇬🇧</div><div><div class="hc-info">Anglais</div><div class="hc-sub">Oral, écrit, jeux</div></div></div>
+          <div class="hc-row"><div class="hc-icon">🔧</div><div><div class="hc-info">Bricolage Créatif</div><div class="hc-sub">Impression 3D, circuits</div></div></div>
+        </div>
+      </div>
+      <div class="float-tag t2">📅 Inscriptions ouvertes !</div>
+    </div>
+  </div>
+</section>
 
-<!-- Nav dots -->
-<div class="nav-dots" id="navDots">
-  <div class="nav-dot active" data-section="hero" title="Home"></div>
-  <div class="nav-dot" data-section="domains" title="Domains"></div>
-  <div class="nav-dot" data-section="about" title="About"></div>
+<section class="section alt-bg" id="activites">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-tag">NOS ACTIVITÉS</div>
+      <h2 class="section-title">Ce que nous enseignons</h2>
+      <p class="section-desc">Des ateliers pratiques et ludiques, conçus pour allumer la curiosité et bâtir les compétences du futur.</p>
+    </div>
+    <div class="act-grid">
+      <div class="act-card reveal"><div class="act-img c1">💻</div><div class="act-body"><div class="act-name">Informatique & Codage</div><p class="act-desc">Initiation à la programmation via Scratch, puis Python. Construction de mini-sites web et jeux.</p><span class="act-tag">Dès 7 ans</span></div></div>
+      <div class="act-card reveal"><div class="act-img c2">🤖</div><div class="act-body"><div class="act-name">Robotique</div><p class="act-desc">Construire et programmer des robots avec Arduino, Lego Mindstorms. Défis et compétitions internes.</p><span class="act-tag">Dès 8 ans</span></div></div>
+      <div class="act-card reveal"><div class="act-img c3">🇬🇧</div><div class="act-body"><div class="act-name">Anglais Interactif</div><p class="act-desc">Méthode communicative, jeux de rôles, chansons et activités numériques pour une vraie maîtrise.</p><span class="act-tag">Dès 6 ans</span></div></div>
+      <div class="act-card reveal"><div class="act-img c4">🔧</div><div class="act-body"><div class="act-name">Bricolage Créatif</div><p class="act-desc">Impression 3D, circuits électroniques, projets de fabrication manuelle et créativité artistique.</p><span class="act-tag">Dès 6 ans</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="galerie">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-tag">GALERIE</div>
+      <h2 class="section-title">Photos & Vidéos des projets</h2>
+      <p class="section-desc">Découvrez les réalisations de nos élèves — robots, projets web, expériences et bien plus.</p>
+    </div>
+    <div class="media-tabs">
+      <button class="mtab active" onclick="filterMedia('all',this)">Tout voir</button>
+      <button class="mtab" onclick="filterMedia('photo',this)">📷 Photos</button>
+      <button class="mtab" onclick="filterMedia('video',this)">🎬 Vidéos</button>
+      <button class="mtab" onclick="filterMedia('projet',this)">🛠️ Projets</button>
+    </div>
+    <div class="media-grid" id="mediaGrid">
+      <div class="media-item" data-type="photo" style="background:linear-gradient(135deg,rgba(26,107,90,.2),rgba(37,160,133,.2))">🤖<div class="media-overlay">🔍 Voir</div></div>
+      <div class="media-item" data-type="photo" style="background:linear-gradient(135deg,rgba(201,146,42,.2),rgba(232,184,75,.2))">💻<div class="media-overlay">🔍 Voir</div></div>
+      <div class="media-item" data-type="photo" style="background:linear-gradient(135deg,rgba(42,74,201,.2),rgba(74,122,232,.2))">🔧<div class="media-overlay">🔍 Voir</div></div>
+      <div class="media-item" data-type="video" style="background:linear-gradient(135deg,rgba(201,42,107,.2),rgba(232,74,184,.2))">🎬<div class="play-btn">▶</div><div class="media-overlay">▶ Voir</div></div>
+      <div class="media-item" data-type="video" style="background:linear-gradient(135deg,rgba(26,107,90,.25),rgba(37,160,133,.25))">🏆<div class="play-btn">▶</div><div class="media-overlay">▶ Voir</div></div>
+      <div class="media-item" data-type="projet" style="background:linear-gradient(135deg,rgba(201,146,42,.25),rgba(232,184,75,.25))">🚀<div class="media-overlay">🔍 Voir</div></div>
+      <div class="media-item" data-type="projet" style="background:linear-gradient(135deg,rgba(42,74,201,.25),rgba(74,122,232,.25))">🛸<div class="media-overlay">🔍 Voir</div></div>
+      <div class="media-item" data-type="photo" style="background:linear-gradient(135deg,rgba(107,26,90,.2),rgba(160,37,134,.2))">🎓<div class="media-overlay">🔍 Voir</div></div>
+      <div class="media-item" data-type="video" style="background:linear-gradient(135deg,rgba(26,107,34,.2),rgba(37,160,69,.2))">🎤<div class="play-btn">▶</div><div class="media-overlay">▶ Voir</div></div>
+    </div>
+    <p style="text-align:center;margin-top:20px;font-family:'Cairo',sans-serif;font-size:13px;color:var(--muted)">💡 Remplacez les emojis par vos vraies photos/vidéos dans le code HTML</p>
+  </div>
+</section>
+
+<section class="section alt-bg" id="contact">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-tag">CONTACT</div>
+      <h2 class="section-title">Contactez-nous</h2>
+      <p class="section-desc">Une question ? Nous vous répondrons dans les 24h.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="reveal">
+        <h3>Parlons de l'avenir de votre enfant</h3>
+        <p>Nous sommes là pour répondre à toutes vos questions sur nos programmes, horaires et tarifs.</p>
+        <div class="ci"><div class="ci-icon">📍</div><div><div class="ci-lbl">Adresse</div><div class="ci-val">Sfax, Tunisie</div></div></div>
+        <div class="ci"><div class="ci-icon">📞</div><div><div class="ci-lbl">Téléphone</div><div class="ci-val">+216 XX XXX XXX</div></div></div>
+        <div class="ci"><div class="ci-icon">✉️</div><div><div class="ci-lbl">Email</div><div class="ci-val">contact@progresselitacademy.tn</div></div></div>
+        <div class="ci"><div class="ci-icon">🕐</div><div><div class="ci-lbl">Horaires</div><div class="ci-val">Sam–Jeu : 9h–18h</div></div></div>
+        <div style="margin-top:24px"><button class="btn-primary" style="width:100%" onclick="openModal()">📋 Inscription en ligne →</button></div>
+      </div>
+      <div class="form-card reveal">
+        <div class="form-title">Envoyez un message</div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Prénom</label><input class="form-input" id="cPrenom" placeholder="Ahmed"/></div>
+          <div class="form-group"><label class="form-label">Nom</label><input class="form-input" id="cNom" placeholder="Ben Ali"/></div>
+        </div>
+        <div class="form-group"><label class="form-label">Email *</label><input class="form-input" id="cEmail" type="email" placeholder="email@exemple.com"/></div>
+        <div class="form-group"><label class="form-label">Téléphone</label><input class="form-input" id="cTel" placeholder="+216 ..."/></div>
+        <div class="form-group"><label class="form-label">Message *</label><textarea class="form-textarea" id="cMsg" placeholder="Votre message..."></textarea></div>
+        <button class="form-submit" onclick="sendContact()">📨 Envoyer le message</button>
+        <div class="form-success" id="contactOK">✅ Merci ! Nous vous répondrons très bientôt.</div>
+      </div>
+    </div>
+  </div>
+</section>
 </div>
 
-<!-- Language Bar -->
-<div class="lang-bar">
-  <div class="lang-btns">
-    <button class="lang-btn active" data-lang="fr">🇫🇷 Français</button>
-    <button class="lang-btn" data-lang="ar">🇹🇳 عربي</button>
-    <button class="lang-btn" data-lang="en">🇬🇧 English</button>
+<!-- ════ ARABIC ════ -->
+<div class="ls" id="ls-ar" dir="rtl">
+<section class="hero"><div class="hero-bg"></div><div class="hero-deco"></div>
+  <div class="hero-inner">
+    <div style="text-align:right">
+      <div class="hero-pill" style="font-family:'Cairo',sans-serif;justify-content:flex-end">🌟 أكاديمية التميز · صفاقس، تونس</div>
+      <h1 class="hero-title">Progress<br><em>Elit</em><br>Academy</h1>
+      <p class="hero-sub" style="font-family:'Cairo',sans-serif">نُعدّ مواهب الغد منذ سن <strong>6 سنوات</strong> — إعلامية، روبوتيك، لغة إنجليزية وأشغال يدوية إبداعية في بيئة محفّزة ومتطورة.</p>
+      <div class="hero-actions" style="justify-content:flex-end">
+        <button class="btn-primary" onclick="openModal()" style="font-family:'Cairo',sans-serif">📋 سجّل الآن</button>
+        <button class="btn-outline" onclick="scrollTo('activites')" style="font-family:'Cairo',sans-serif">اكتشف ←</button>
+      </div>
+      <div class="hero-badges" style="justify-content:flex-end">
+        <div class="badge"><div class="badge-num">6+</div><div class="badge-lbl" style="font-family:'Cairo',sans-serif">سنوات</div></div>
+        <div class="badge"><div class="badge-num">4</div><div class="badge-lbl" style="font-family:'Cairo',sans-serif">تخصصات</div></div>
+        <div class="badge"><div class="badge-num">3</div><div class="badge-lbl" style="font-family:'Cairo',sans-serif">لغات</div></div>
+        <div class="badge"><div class="badge-num">100%</div><div class="badge-lbl" style="font-family:'Cairo',sans-serif">تطبيقي</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="section alt-bg">
+  <div class="container">
+    <div class="section-header"><div class="section-tag">أنشطتنا</div><h2 class="section-title" style="font-family:'Cairo',sans-serif">ماذا نُدرِّس؟</h2><p class="section-desc" style="font-family:'Cairo',sans-serif">ورشات عملية وممتعة تُنمّي الفضول وتبني مهارات المستقبل.</p></div>
+    <div class="act-grid">
+      <div class="act-card"><div class="act-img c1">💻</div><div class="act-body"><div class="act-name" style="font-family:'Cairo',sans-serif">إعلامية وبرمجة</div><p class="act-desc">تعلم البرمجة بـ Scratch ثم Python. بناء مواقع وألعاب.</p><span class="act-tag">من 7 سنوات</span></div></div>
+      <div class="act-card"><div class="act-img c2">🤖</div><div class="act-body"><div class="act-name" style="font-family:'Cairo',sans-serif">روبوتيك</div><p class="act-desc">بناء وبرمجة الروبوتات بـ Arduino و Lego Mindstorms.</p><span class="act-tag">من 8 سنوات</span></div></div>
+      <div class="act-card"><div class="act-img c3">🇬🇧</div><div class="act-body"><div class="act-name" style="font-family:'Cairo',sans-serif">اللغة الإنجليزية</div><p class="act-desc">طريقة تواصلية، ألعاب أدوار وأنشطة رقمية لإتقان اللغة.</p><span class="act-tag">من 6 سنوات</span></div></div>
+      <div class="act-card"><div class="act-img c4">🔧</div><div class="act-body"><div class="act-name" style="font-family:'Cairo',sans-serif">أشغال يدوية إبداعية</div><p class="act-desc">طباعة ثلاثية الأبعاد، دوائر كهربائية ومشاريع إبداعية.</p><span class="act-tag">من 6 سنوات</span></div></div>
+    </div>
+  </div>
+</section>
+<section class="section alt-bg" style="background:var(--bg)">
+  <div class="container">
+    <div class="section-header"><div class="section-tag">تواصل معنا</div><h2 class="section-title" style="font-family:'Cairo',sans-serif">اتصل بنا</h2></div>
+    <div class="contact-grid" style="direction:rtl">
+      <div>
+        <h3 style="font-family:'Cairo',sans-serif;font-family:'Playfair Display',serif">لنتحدث عن مستقبل طفلك</h3>
+        <p style="font-family:'Cairo',sans-serif">نحن هنا للإجابة على جميع أسئلتك حول البرامج والمواعيد والأسعار.</p>
+        <div class="ci"><div class="ci-icon">📍</div><div><div class="ci-lbl">العنوان</div><div class="ci-val" style="font-family:'Cairo',sans-serif">صفاقس، تونس</div></div></div>
+        <div class="ci"><div class="ci-icon">📞</div><div><div class="ci-lbl">الهاتف</div><div class="ci-val">+216 XX XXX XXX</div></div></div>
+        <div style="margin-top:24px"><button class="btn-primary" style="width:100%;font-family:'Cairo',sans-serif" onclick="openModal()">📋 التسجيل الإلكتروني ←</button></div>
+      </div>
+      <div class="form-card">
+        <div class="form-title" style="font-family:'Cairo',sans-serif">أرسل رسالة</div>
+        <div class="form-group"><label class="form-label">الاسم الكامل</label><input class="form-input" placeholder="اسمك الكامل" style="text-align:right"/></div>
+        <div class="form-group"><label class="form-label">البريد الإلكتروني</label><input class="form-input" type="email" placeholder="email@exemple.com"/></div>
+        <div class="form-group"><label class="form-label">الرسالة</label><textarea class="form-textarea" placeholder="رسالتك..." style="text-align:right"></textarea></div>
+        <button class="form-submit" style="font-family:'Cairo',sans-serif">📨 إرسال</button>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ════ ENGLISH ════ -->
+<div class="ls" id="ls-en">
+<section class="hero"><div class="hero-bg"></div><div class="hero-deco"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-pill">🌟 Academy of Excellence · Sfax, Tunisia</div>
+      <h1 class="hero-title">Progress<br><em>Elit</em><br>Academy</h1>
+      <p class="hero-sub">Shaping tomorrow's talents from age <strong>6</strong> — coding, robotics, English and creative making in an innovative environment.</p>
+      <div class="hero-actions">
+        <button class="btn-primary" onclick="openModal()">📋 Enroll Now</button>
+        <button class="btn-outline" onclick="scrollTo('activites')">Discover →</button>
+      </div>
+      <div class="hero-badges">
+        <div class="badge"><div class="badge-num">6+</div><div class="badge-lbl">Min. Age</div></div>
+        <div class="badge"><div class="badge-num">4</div><div class="badge-lbl">Domains</div></div>
+        <div class="badge"><div class="badge-num">3</div><div class="badge-lbl">Languages</div></div>
+        <div class="badge"><div class="badge-num">100%</div><div class="badge-lbl">Hands-on</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="section alt-bg">
+  <div class="container">
+    <div class="section-header"><div class="section-tag">ACTIVITIES</div><h2 class="section-title">What We Teach</h2><p class="section-desc">Practical, fun workshops designed to spark curiosity and build future skills.</p></div>
+    <div class="act-grid">
+      <div class="act-card"><div class="act-img c1">💻</div><div class="act-body"><div class="act-name">Coding & CS</div><p class="act-desc">Programming with Scratch then Python. Build websites and games.</p><span class="act-tag">Age 7+</span></div></div>
+      <div class="act-card"><div class="act-img c2">🤖</div><div class="act-body"><div class="act-name">Robotics</div><p class="act-desc">Build and program robots with Arduino and Lego Mindstorms.</p><span class="act-tag">Age 8+</span></div></div>
+      <div class="act-card"><div class="act-img c3">🇬🇧</div><div class="act-body"><div class="act-name">Interactive English</div><p class="act-desc">Role plays, songs and digital activities for real oral fluency.</p><span class="act-tag">Age 6+</span></div></div>
+      <div class="act-card"><div class="act-img c4">🔧</div><div class="act-body"><div class="act-name">Creative Making</div><p class="act-desc">3D printing, electronics, hands-on fabrication and art.</p><span class="act-tag">Age 6+</span></div></div>
+    </div>
+  </div>
+</section>
+<section class="section alt-bg" style="background:var(--bg)">
+  <div class="container">
+    <div class="section-header"><div class="section-tag">CONTACT</div><h2 class="section-title">Get in Touch</h2></div>
+    <div class="contact-grid">
+      <div>
+        <h3 style="font-family:'Playfair Display',serif;font-size:26px;margin-bottom:14px;color:var(--dark)">Let's talk about your child's future</h3>
+        <p style="font-family:'Cairo',sans-serif;color:var(--muted);line-height:1.7;margin-bottom:28px">We're here to answer all your questions about our programs, schedules and pricing.</p>
+        <div class="ci"><div class="ci-icon">📍</div><div><div class="ci-lbl">Address</div><div class="ci-val">Sfax, Tunisia</div></div></div>
+        <div class="ci"><div class="ci-icon">📞</div><div><div class="ci-lbl">Phone</div><div class="ci-val">+216 XX XXX XXX</div></div></div>
+        <div style="margin-top:24px"><button class="btn-primary" style="width:100%" onclick="openModal()">📋 Online Enrollment →</button></div>
+      </div>
+      <div class="form-card">
+        <div class="form-title">Send a Message</div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">First Name</label><input class="form-input" placeholder="Ahmed"/></div>
+          <div class="form-group"><label class="form-label">Last Name</label><input class="form-input" placeholder="Ben Ali"/></div>
+        </div>
+        <div class="form-group"><label class="form-label">Email *</label><input class="form-input" type="email" placeholder="email@example.com"/></div>
+        <div class="form-group"><label class="form-label">Message *</label><textarea class="form-textarea" placeholder="Your message..."></textarea></div>
+        <button class="form-submit">📨 Send Message</button>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h2>🎓 Progress Elit Academy</h2>
+        <p>Former les innovateurs, créateurs et leaders de demain — dès 6 ans. Sfax, Tunisie.</p>
+      </div>
+      <div class="footer-col">
+        <h4>PROGRAMMES</h4>
+        <ul>
+          <li><a href="#">💻 Informatique</a></li>
+          <li><a href="#">🤖 Robotique</a></li>
+          <li><a href="#">🇬🇧 Anglais</a></li>
+          <li><a href="#">🔧 Bricolage</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>LIENS</h4>
+        <ul>
+          <li><a href="#activites">Activités</a></li>
+          <li><a href="#galerie">Galerie</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="admin.html">⚙️ Administration</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Progress Elit Academy — Tous droits réservés</p>
+      <p style="color:var(--gold2)">Sfax, Tunisie 🇹🇳</p>
+    </div>
+  </div>
+</footer>
+
+<!-- INSCRIPTION MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="bgClose(event)">
+  <div class="modal" id="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div id="modalMain">
+      <h2 class="modal-title">📋 Inscription en ligne</h2>
+      <p class="modal-sub">Remplissez le formulaire en 3 étapes simples.</p>
+      <div class="step-bar">
+        <div class="step-dot done" id="sd1"></div>
+        <div class="step-dot" id="sd2"></div>
+        <div class="step-dot" id="sd3"></div>
+      </div>
+      <!-- Step 1 -->
+      <div class="step-cnt active" id="step1">
+        <p class="step-lbl">ÉTAPE 1 — INFORMATIONS PARENT</p>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Prénom *</label><input class="form-input" id="pPre" placeholder="Prénom"/></div>
+          <div class="form-group"><label class="form-label">Nom *</label><input class="form-input" id="pNom" placeholder="Nom"/></div>
+        </div>
+        <div class="form-group"><label class="form-label">Email *</label><input class="form-input" id="pEmail" type="email" placeholder="email@exemple.com"/></div>
+        <div class="form-group"><label class="form-label">Téléphone *</label><input class="form-input" id="pTel" placeholder="+216 XX XXX XXX"/></div>
+        <div class="modal-nav"><button class="btn-next" onclick="goStep(2)">Suivant →</button></div>
+      </div>
+      <!-- Step 2 -->
+      <div class="step-cnt" id="step2">
+        <p class="step-lbl">ÉTAPE 2 — INFORMATIONS ENFANT</p>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Prénom enfant *</label><input class="form-input" id="ePre" placeholder="Prénom"/></div>
+          <div class="form-group"><label class="form-label">Âge *</label><input class="form-input" id="eAge" type="number" min="6" max="18" placeholder="ex: 8"/></div>
+        </div>
+        <div class="form-group"><label class="form-label">Niveau scolaire</label>
+          <select class="form-select" id="eNiv">
+            <option value="">-- Sélectionner --</option>
+            <option>Maternelle / Préscolaire</option>
+            <option>1ère – 2ème primaire</option>
+            <option>3ème – 4ème primaire</option>
+            <option>5ème – 6ème primaire</option>
+            <option>Collège (7ème – 9ème)</option>
+            <option>Lycée</option>
+          </select>
+        </div>
+        <div class="form-group"><label class="form-label">Domaines souhaités *</label>
+          <div class="check-group" id="domainesGroup">
+            <label class="check-item" onclick="this.classList.toggle('sel')"><input type="checkbox" name="dom" value="Informatique"> 💻 Informatique & Codage</label>
+            <label class="check-item" onclick="this.classList.toggle('sel')"><input type="checkbox" name="dom" value="Robotique"> 🤖 Robotique</label>
+            <label class="check-item" onclick="this.classList.toggle('sel')"><input type="checkbox" name="dom" value="Anglais"> 🇬🇧 Anglais Interactif</label>
+            <label class="check-item" onclick="this.classList.toggle('sel')"><input type="checkbox" name="dom" value="Bricolage"> 🔧 Bricolage Créatif</label>
+          </div>
+        </div>
+        <div class="modal-nav">
+          <button class="btn-back" onclick="goStep(1)">← Retour</button>
+          <button class="btn-next" onclick="goStep(3)">Suivant →</button>
+        </div>
+      </div>
+      <!-- Step 3 -->
+      <div class="step-cnt" id="step3">
+        <p class="step-lbl">ÉTAPE 3 — CONFIRMATION</p>
+        <div class="recap-box" id="recap"></div>
+        <div class="form-group"><label class="form-label">Message / Questions (optionnel)</label><textarea class="form-textarea" id="iMsg" placeholder="Informations supplémentaires..."></textarea></div>
+        <div class="modal-nav">
+          <button class="btn-back" onclick="goStep(2)">← Retour</button>
+          <button class="btn-next" onclick="submitInscription()">✅ Confirmer</button>
+        </div>
+      </div>
+    </div>
+    <div class="success-modal" id="modalOK" style="display:none">
+      <div class="success-icon">🎉</div>
+      <h3>Inscription envoyée !</h3>
+      <p>Merci ! Notre équipe vous contactera dans les 24h pour confirmer et vous donner tous les détails.</p>
+      <button class="btn-primary" style="margin-top:20px" onclick="closeModal()">Fermer</button>
+    </div>
   </div>
 </div>
 
-<!-- ==================== FRENCH ==================== -->
-<div class="lang-section active" id="lang-fr">
+<!-- Toast -->
+<div class="toast" id="toast"></div>
 
-  <section class="hero" id="hero">
-    <div class="hero-badge">TUNIS · TUNISIE · ACADÉMIE TECH</div>
-    <div class="hero-logo">PROGRESS</div>
-    <div class="hero-sub">ACADEMY</div>
-    <p class="hero-tagline">Former les innovateurs de demain dès l'âge de 6 ans — informatique, robotique, anglais et bricolage créatif.</p>
-    <div class="hero-age"><span class="icon">🚀</span> Dès 6 ans · À partir de 6 ans · من سن 6 سنوات</div>
-    <div class="scroll-hint">SCROLL <span></span></div>
-  </section>
+<!-- Firebase SDK -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore, collection, addDoc, serverTimestamp }
+  from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-  <section id="domains">
-    <div class="section-wrapper">
-      <p class="section-label">// NOS DOMAINES</p>
-      <h2 class="section-title">Ce que nous enseignons</h2>
-      <div class="section-divider"></div>
-      <div class="domains-grid">
-        <div class="domain-card">
-          <span class="domain-icon">💻</span>
-          <div class="domain-name-fr">Informatique</div>
-          <div class="domain-name-ar">إعلامية</div>
-          <div class="domain-name-en">Computer Science</div>
-        </div>
-        <div class="domain-card">
-          <span class="domain-icon">🤖</span>
-          <div class="domain-name-fr">Robotique</div>
-          <div class="domain-name-ar">روبوتيك</div>
-          <div class="domain-name-en">Robotics</div>
-        </div>
-        <div class="domain-card">
-          <span class="domain-icon">🇬🇧</span>
-          <div class="domain-name-fr">Anglais</div>
-          <div class="domain-name-ar">اللغة الإنجليزية</div>
-          <div class="domain-name-en">English Language</div>
-        </div>
-        <div class="domain-card">
-          <span class="domain-icon">🔧</span>
-          <div class="domain-name-fr">Bricolage Créatif</div>
-          <div class="domain-name-ar">أشغال يدوية إبداعية</div>
-          <div class="domain-name-en">Creative Making</div>
-        </div>
-      </div>
-
-      <div class="stats-row">
-        <div class="stat-box"><span class="stat-num">6+</span><div class="stat-label">Âge minimum</div></div>
-        <div class="stat-box"><span class="stat-num">4</span><div class="stat-label">Spécialités</div></div>
-        <div class="stat-box"><span class="stat-num">3</span><div class="stat-label">Langues d'enseignement</div></div>
-        <div class="stat-box"><span class="stat-num">∞</span><div class="stat-label">Possibilités offertes</div></div>
-      </div>
-    </div>
-  </section>
-
-  <section id="about">
-    <div class="section-wrapper">
-      <p class="section-label">// À PROPOS</p>
-      <h2 class="section-title">Notre Mission</h2>
-      <div class="section-divider"></div>
-      <div class="about-grid">
-        <div class="about-text">
-          <strong>Progress Academy</strong> est une académie dédiée à l'apprentissage des technologies et des compétences du futur. Nous croyons que chaque enfant, dès l'âge de <strong>6 ans</strong>, peut apprendre à coder, construire des robots, maîtriser l'anglais et développer sa créativité par le bricolage.
-          <br/><br/>
-          Notre approche est ludique, progressive et adaptée à chaque enfant. Nous combinons théorie et pratique dans un environnement stimulant et bienveillant.
-        </div>
-        <div class="vision-block">
-          <h3>🎯 Notre Vision</h3>
-          <p>Préparer chaque enfant à être acteur du monde technologique de demain — avec curiosité, confiance et créativité.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-</div>
-
-<!-- ==================== ARABIC ==================== -->
-<div class="lang-section" id="lang-ar" dir="rtl" style="font-family:'Cairo',sans-serif;">
-
-  <section class="hero">
-    <div class="hero-badge">تونس · أكاديمية تكنولوجية</div>
-    <div class="hero-logo">PROGRESS</div>
-    <div class="hero-sub">ACADEMY</div>
-    <p class="hero-tagline" style="font-family:'Cairo',sans-serif;">نُعدّ مبتكري الغد انطلاقاً من سن 6 سنوات — إعلامية، روبوتيك، اللغة الإنجليزية وأشغال يدوية.</p>
-    <div class="hero-age"><span class="icon">🚀</span> من سن 6 سنوات · Dès 6 ans</div>
-    <div class="scroll-hint">انتقل <span></span></div>
-  </section>
-
-  <section>
-    <div class="section-wrapper">
-      <p class="section-label">// تخصصاتنا</p>
-      <h2 class="section-title">ماذا نُدرِّس؟</h2>
-      <div class="section-divider"></div>
-      <div class="domains-grid">
-        <div class="domain-card">
-          <span class="domain-icon">💻</span>
-          <div class="domain-name-ar">إعلامية</div>
-          <div class="domain-name-fr">Informatique</div>
-          <div class="domain-name-en">Computer Science</div>
-        </div>
-        <div class="domain-card">
-          <span class="domain-icon">🤖</span>
-          <div class="domain-name-ar">روبوتيك</div>
-          <div class="domain-name-fr">Robotique</div>
-          <div class="domain-name-en">Robotics</div>
-        </div>
-        <div class="domain-card">
-          <span class="domain-icon">🇬🇧</span>
-          <div class="domain-name-ar">اللغة الإنجليزية</div>
-          <div class="domain-name-fr">Anglais</div>
-          <div class="domain-name-en">English Language</div>
-        </div>
-        <div class="domain-card">
-          <span class="domain-icon">🔧</span>
-          <div class="domain-name-ar">أشغال يدوية إبداعية</div>
-          <div class="domain-name-fr">Bricolage Créatif</div>
-          <div class="domain-name-en">Creative Making</div>
-        </div>
-      </div>
-      <div class="stats-row">
-        <div class="stat-box"><span class="stat-num">6+</span><div class="stat-label">السن الأدنى</div></div>
-        <div class="stat-box"><span class="stat-num">4</span><div class="stat-label">تخصصات</div></div>
-        <div class="stat-box"><span class="stat-num">3</span><div class="stat-label">لغات التدريس</div></div>
-        <div class="stat-box"><span class="stat-num">∞</span><div class="stat-label">إمكانيات لا محدودة</div></div>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="section-wrapper">
-      <p class="section-label">// من نحن</p>
-      <h2 class="section-title">مهمتنا</h2>
-      <div class="section-divider"></div>
-      <div class="about-grid">
-        <div class="about-text">
-          <strong>Progress Academy</strong> أكاديمية متخصصة في تعليم تقنيات ومهارات المستقبل. نؤمن بأن كل طفل، منذ سن <strong>6 سنوات</strong>، قادر على تعلم البرمجة، بناء الروبوتات، إتقان اللغة الإنجليزية وتطوير إبداعه من خلال الأشغال اليدوية.
-          <br/><br/>
-          نهجنا تفاعلي وتدريجي، يجمع بين النظرية والتطبيق في بيئة ممتعة ومحفزة.
-        </div>
-        <div class="vision-block">
-          <h3>🎯 رؤيتنا</h3>
-          <p>تجهيز كل طفل ليكون فاعلاً في عالم التكنولوجيا لغد أفضل — بفضول، ثقة وإبداع.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-</div>
-
-<!-- ==================== ENGLISH ==================== -->
-<div class="lang-section" id="lang-en">
-
-  <section class="hero">
-    <div class="hero-badge">TUNISIA · TECH ACADEMY</div>
-    <div class="hero-logo">PROGRESS</div>
-    <div class="hero-sub">ACADEMY</div>
-    <p class="hero-tagline">Shaping tomorrow's innovators from age 6 — coding, robotics, English & hands-on making.</p>
-    <div class="hero-age"><span class="icon">🚀</span> From age 6 · Dès 6 ans · من سن 6 سنوات</div>
-    <div class="scroll-hint">SCROLL <span></span></div>
-  </section>
-
-  <section>
-    <div class="section-wrapper">
-      <p class="section-label">// OUR DOMAINS</p>
-      <h2 class="section-title">What We Teach</h2>
-      <div class="section-divider"></div>
-      <div class="domains-grid">
-        <div class="domain-card">
-          <span class="domain-icon">💻</span>
-          <div class="domain-name-fr">Computer Science</div>
-          <div class="domain-name-ar">إعلامية</div>
-          <div class="domain-name-en">Coding & Algorithms</div>
-        </div>
-        <div class="domain-card">
-          <span class="domain-icon">🤖</span>
-          <div class="domain-name-fr">Robotics</div>
-          <div class="domain-name-ar">روبوتيك</div>
-          <div class="domain-name-en">Build & Program Robots</div>
-        </div>
-        <div class="domain-card">
-          <span class="domain-icon">🇬🇧</span>
-          <div class="domain-name-fr">English Language</div>
-          <div class="domain-name-ar">اللغة الإنجليزية</div>
-          <div class="domain-name-en">Communication & Fluency</div>
-        </div>
-        <div class="domain-card">
-          <span class="domain-icon">🔧</span>
-          <div class="domain-name-fr">Creative Making</div>
-          <div class="domain-name-ar">أشغال يدوية</div>
-          <div class="domain-name-en">Crafts & Innovation</div>
-        </div>
-      </div>
-      <div class="stats-row">
-        <div class="stat-box"><span class="stat-num">6+</span><div class="stat-label">Min. Age</div></div>
-        <div class="stat-box"><span class="stat-num">4</span><div class="stat-label">Specialties</div></div>
-        <div class="stat-box"><span class="stat-num">3</span><div class="stat-label">Languages</div></div>
-        <div class="stat-box"><span class="stat-num">∞</span><div class="stat-label">Possibilities</div></div>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="section-wrapper">
-      <p class="section-label">// ABOUT US</p>
-      <h2 class="section-title">Our Mission</h2>
-      <div class="section-divider"></div>
-      <div class="about-grid">
-        <div class="about-text">
-          <strong>Progress Academy</strong> is dedicated to teaching future-ready skills and technology. We believe every child, starting at age <strong>6</strong>, can learn to code, build robots, master English, and unlock creativity through hands-on making.
-          <br/><br/>
-          Our approach is playful, progressive and adapted to each child — blending theory with practice in an exciting, supportive environment.
-        </div>
-        <div class="vision-block">
-          <h3>🎯 Our Vision</h3>
-          <p>Empower every child to be a confident creator in tomorrow's digital world — with curiosity, confidence, and creativity.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-</div>
-
-<!-- Footer -->
-<footer>
-  <div class="footer-logo">PROGRESS ACADEMY</div>
-  <p>💻 Informatique &nbsp;·&nbsp; 🤖 Robotique &nbsp;·&nbsp; 🇬🇧 Anglais &nbsp;·&nbsp; 🔧 Bricolage</p>
-  <p style="margin-top:10px; font-size:11px; letter-spacing:0.15em;">© 2025 Progress Academy — Tous droits réservés · جميع الحقوق محفوظة · All rights reserved</p>
-</footer>
+/* ⚠️ REMPLACE PAR TA PROPRE CONFIG FIREBASE */
+const cfg = {
+  apiKey: "VOTRE_API_KEY",
+  authDomain: "VOTRE_PROJECT.firebaseapp.com",
+  projectId: "VOTRE_PROJECT_ID",
+  storageBucket: "VOTRE_PROJECT.appspot.com",
+  messagingSenderId: "XXXXXXXXX",
+  appId: "VOTRE_APP_ID"
+};
+try{
+  const app = initializeApp(cfg);
+  const db = getFirestore(app);
+  window._db=db; window._addDoc=addDoc;
+  window._col=collection; window._ts=serverTimestamp;
+}catch(e){ console.log("Firebase non configuré — mode démo"); }
+</script>
 
 <script>
-  // Stars
-  const starsEl = document.getElementById('stars');
-  for (let i = 0; i < 120; i++) {
-    const s = document.createElement('div');
-    s.className = 'star';
-    const size = Math.random() * 2.5 + 0.5;
-    s.style.cssText = `
-      width:${size}px; height:${size}px;
-      left:${Math.random()*100}%; top:${Math.random()*100}%;
-      --d:${2 + Math.random()*4}s;
-      animation-delay:${Math.random()*4}s;
-    `;
-    starsEl.appendChild(s);
+// ── Lang ──
+document.querySelectorAll('.lbtn').forEach(b=>{
+  b.addEventListener('click',()=>{
+    const l=b.dataset.lang;
+    document.querySelectorAll('.lbtn').forEach(x=>x.classList.remove('active'));
+    document.querySelectorAll('.ls').forEach(s=>s.classList.remove('active'));
+    b.classList.add('active');
+    document.getElementById('ls-'+l).classList.add('active');
+    document.documentElement.dir=l==='ar'?'rtl':'ltr';
+  });
+});
+
+// ── Scroll ──
+window.addEventListener('scroll',()=>{
+  document.getElementById('navbar').classList.toggle('scrolled',scrollY>30);
+});
+window.scrollTo = id => document.getElementById(id)?.scrollIntoView({behavior:'smooth'});
+
+// ── Reveal ──
+const ro=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+
+// ── Gallery filter ──
+window.filterMedia=(type,btn)=>{
+  document.querySelectorAll('.mtab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.media-item').forEach(i=>{
+    i.style.display=(type==='all'||i.dataset.type===type)?'flex':'none';
+  });
+};
+
+// ── Modal ──
+let step=1;
+window.openModal=()=>{
+  document.getElementById('modalOverlay').classList.add('open');
+  document.getElementById('modalMain').style.display='block';
+  document.getElementById('modalOK').style.display='none';
+  goStep(1);
+};
+window.closeModal=()=>document.getElementById('modalOverlay').classList.remove('open');
+window.bgClose=e=>{if(e.target.id==='modalOverlay')closeModal()};
+
+window.goStep=n=>{
+  step=n;
+  if(n===3)buildRecap();
+  document.querySelectorAll('.step-cnt').forEach((s,i)=>s.classList.toggle('active',i===n-1));
+  [1,2,3].forEach(i=>document.getElementById('sd'+i).classList.toggle('done',i<=n));
+};
+
+function g(id){return(document.getElementById(id)||{value:''}).value}
+
+function buildRecap(){
+  const doms=[...document.querySelectorAll('input[name="dom"]:checked')].map(c=>c.value).join(', ');
+  document.getElementById('recap').innerHTML=
+    `<strong>👤 Parent :</strong> ${g('pPre')} ${g('pNom')}<br>
+     <strong>📧 Email :</strong> ${g('pEmail')}<br>
+     <strong>📞 Tél :</strong> ${g('pTel')}<br>
+     <strong>🧒 Enfant :</strong> ${g('ePre')}, ${g('eAge')} ans${g('eNiv')?', '+g('eNiv'):''}<br>
+     <strong>📚 Domaines :</strong> ${doms||'—'}`;
+}
+
+window.submitInscription=async()=>{
+  const doms=[...document.querySelectorAll('input[name="dom"]:checked')].map(c=>c.value);
+  if(!g('pPre')||!g('pEmail')||!g('pTel')||!g('ePre')||!g('eAge')||!doms.length){
+    toast('⚠️ Veuillez remplir tous les champs obligatoires.','error');return;
   }
+  const data={
+    parent:{prenom:g('pPre'),nom:g('pNom'),email:g('pEmail'),tel:g('pTel')},
+    enfant:{prenom:g('ePre'),age:parseInt(g('eAge')),niveau:g('eNiv')},
+    domaines:doms, message:g('iMsg'),
+    statut:'en_attente', paiement:'non_payé',
+    createdAt:new Date().toISOString()
+  };
+  try{
+    if(window._db){
+      await window._addDoc(window._col(window._db,'inscriptions'),{...data,createdAt:window._ts()});
+    } else {
+      const arr=JSON.parse(localStorage.getItem('inscriptions')||'[]');
+      arr.push({...data,id:'d'+Date.now()});
+      localStorage.setItem('inscriptions',JSON.stringify(arr));
+    }
+    document.getElementById('modalMain').style.display='none';
+    document.getElementById('modalOK').style.display='block';
+    toast('🎉 Inscription envoyée !','success');
+  }catch(e){toast('❌ Erreur: '+e.message,'error');}
+};
 
-  // Custom cursor
-  const cursor = document.getElementById('cursor');
-  const dot = document.getElementById('cursorDot');
-  document.addEventListener('mousemove', e => {
-    cursor.style.left = e.clientX + 'px';
-    cursor.style.top = e.clientY + 'px';
-    dot.style.left = e.clientX + 'px';
-    dot.style.top = e.clientY + 'px';
-  });
+window.sendContact=async()=>{
+  if(!g('cEmail')||!g('cMsg')){toast('⚠️ Email et message requis.','error');return;}
+  const data={
+    prenom:g('cPre'),nom:g('cNom'),email:g('cEmail'),tel:g('cTel'),
+    message:g('cMsg'),type:'contact',createdAt:new Date().toISOString()
+  };
+  try{
+    if(window._db){
+      await window._addDoc(window._col(window._db,'messages'),{...data,createdAt:window._ts()});
+    } else {
+      const arr=JSON.parse(localStorage.getItem('messages')||'[]');
+      arr.push({...data,id:'d'+Date.now()});
+      localStorage.setItem('messages',JSON.stringify(arr));
+    }
+    document.getElementById('contactOK').style.display='block';
+    toast('✅ Message envoyé !','success');
+  }catch(e){toast('❌ Erreur','error');}
+};
 
-  // Language switcher
-  document.querySelectorAll('.lang-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const lang = btn.dataset.lang;
-      document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
-      document.querySelectorAll('.lang-section').forEach(s => s.classList.remove('active'));
-      btn.classList.add('active');
-      document.getElementById('lang-' + lang).classList.add('active');
-      document.documentElement.lang = lang;
-      document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
-    });
-  });
-
-  // Nav dots highlight on scroll
-  const sections = document.querySelectorAll('section');
-  const dots = document.querySelectorAll('.nav-dot');
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        dots.forEach(d => d.classList.remove('active'));
-        const idx = [...sections].indexOf(e.target);
-        if (dots[idx]) dots[idx].classList.add('active');
-      }
-    });
-  }, { threshold: 0.5 });
-  sections.forEach(s => observer.observe(s));
+function toast(msg,type='success'){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.className='toast '+type+' show';
+  setTimeout(()=>t.classList.remove('show'),3500);
+}
 </script>
 </body>
 </html>
